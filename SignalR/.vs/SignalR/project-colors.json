@@ -1,0 +1,11 @@
+{
+  "Version": 1,
+  "ProjectMap": {
+    "3ea09593-c3cf-448a-a353-a760263961b2": {
+      "ProjectGuid": "3ea09593-c3cf-448a-a353-a760263961b2",
+      "DisplayName": "SignalR",
+      "ColorIndex": 0
+    }
+  },
+  "NextColorIndex": 1
+}
