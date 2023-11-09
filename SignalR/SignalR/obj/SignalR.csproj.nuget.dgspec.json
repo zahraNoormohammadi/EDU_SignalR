@@ -25,6 +25,7 @@
           "net6.0"
         ],
         "sources": {
+          "http://upm.dpkharazmi.com/repository/floor3-nuget/": {},
           "http://upm.dpkharazmi.com/repository/nuget3/": {},
           "https://www.nuget.org/packages": {}
         },

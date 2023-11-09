@@ -6,31 +6,41 @@ using SignalR.Services;
 
 namespace SignalR.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("Hub")]
     [ApiController]
     public class HubController : ControllerBase
     {
         #region props
         private readonly IHubContext<MessageHub, IMessageHubClient> _messageHub;
+        private readonly IHubContext<ChatHub, IMessageHubClient> _chatHub;
         #endregion
 
         #region ctor
 
-        public HubController(IHubContext<MessageHub, IMessageHubClient> messageHub)
+        public HubController(IHubContext<MessageHub, IMessageHubClient> messageHub, IHubContext<ChatHub, IMessageHubClient> chatHub)
         {
             _messageHub = messageHub;
+            _chatHub = chatHub;
         }
         #endregion
 
         #region publicMethods
+
         [HttpGet("SendMessage")]
         public async Task<string> SendMessage()
         {
             var message = new List<string>();
-            message.Add(JsonConvert.SerializeObject(new TestModel(){Id = 1,FirstName = "M",LastName = "Z"}));//when send model
+            message.Add(JsonConvert.SerializeObject(new TestModel() { Id = 1, FirstName = "M", LastName = "Z" }));//when send model
             message.Add("sample text");//when send text
-            await _messageHub.Clients.All.SendOffersToUser(message);
+            await _messageHub.Clients.All.SendMessageToUser(message);
+           
             return "Message is sent!";
+        }
+        [HttpGet("SendText")]
+        public async Task<string> SendText()
+        {
+            await _chatHub.Clients.All.SendAsync( "Zamani", "Hello");
+            return "Text is sent!";
         }
         #endregion
     }
