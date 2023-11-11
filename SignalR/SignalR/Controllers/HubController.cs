@@ -1,5 +1,7 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Http.Connections;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.SignalR;
+using Microsoft.AspNetCore.SignalR.Client;
 using Newtonsoft.Json;
 using SignalR.Contracts;
 using SignalR.Services;
@@ -25,6 +27,8 @@ namespace SignalR.Controllers
         #endregion
 
         #region publicMethods
+
+      
 
         [HttpGet("SendMessage")]
         public async Task<string> SendMessage()
