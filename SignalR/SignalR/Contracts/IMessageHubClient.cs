@@ -9,5 +9,6 @@
         /// <returns></returns>
         Task SendMessageToUser(List<string> message);
         Task SendAsync(string user,string message);
+        Task ReceiveAsync(string user, string message);
     }
 }

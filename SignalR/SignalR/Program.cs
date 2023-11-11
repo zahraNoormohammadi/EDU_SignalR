@@ -1,4 +1,4 @@
-using SignalR.Services;
+﻿using SignalR.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddSignalR();
@@ -13,7 +13,7 @@ app.UseRouting();
 app.UseEndpoints(endpoints =>
 {
     endpoints.MapControllers();
-    endpoints.MapHub<MessageHub>("/message");
+    endpoints.MapHub<MessageHub>("/message");//نام کانال های ارسال پیام
     endpoints.MapHub<ChatHub>("/Chat");
 });
 app.Run();
