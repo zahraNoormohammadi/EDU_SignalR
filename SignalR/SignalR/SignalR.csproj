@@ -12,6 +12,7 @@
     <PackageReference Include="Microsoft.AspNetCore.SignalR.Protocols.Json" Version="6.0.24" />
     <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="6.0.2-mauipre.1.22102.15" />
     <PackageReference Include="Microsoft.Extensions.Features" Version="6.0.24" />
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="6.2.3" />
   </ItemGroup>
 
 </Project>
