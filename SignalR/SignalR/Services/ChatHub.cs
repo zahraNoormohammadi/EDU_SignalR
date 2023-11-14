@@ -1,8 +1,8 @@
 ﻿using Microsoft.AspNetCore.Http.Connections;
 using Microsoft.AspNetCore.SignalR;
 using Microsoft.AspNetCore.SignalR.Client;
-using Newtonsoft.Json;
 using SignalR.Contracts;
+using SignalR.Models;
 
 namespace SignalR.Services
 {
@@ -11,25 +11,23 @@ namespace SignalR.Services
         /// <summary>
         /// فقط این متد SendAsync پیاده سازی شده است
         /// </summary>
-        /// <param name="user"></param>
-        /// <param name="message"></param>
+        /// <param name="model"></param>
         /// <returns></returns>
-        public async Task SendAsync( string user, string message)
-            => await Clients.All.SendAsync( user, message);
+        public async Task SendAsync( MessageModel model)
+            => await Clients.All.SendAsync( model);
 
-        public async Task ReceiveAsync(string user, string message)
+        public async Task ReceiveAsync(MessageModel model)
         {
             var connection = new HubConnectionBuilder().WithUrl("http://localhost:5170/Chat", options => {
                 options.Transports = HttpTransportType.WebSockets;
             }).WithAutomaticReconnect().Build();
             await connection.StartAsync();
          
-            connection.On<string,string>("ReceiveAsync",
-                (user, message) => { Clients.All.SendAsync(user, message).GetAwaiter();
-
+            connection.On<string,string,string>("ReceiveAsync",
+                (user, message,date) => { Clients.All.SendAsync(model).GetAwaiter();
 
             });
-            await Clients.All.ReceiveAsync(user, message);
+            await Clients.All.ReceiveAsync(model);
         }
     }
 }
