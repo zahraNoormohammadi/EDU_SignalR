@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.SignalR;
 using Microsoft.AspNetCore.SignalR.Client;
 using Newtonsoft.Json;
 using SignalR.Contracts;
+using SignalR.Models;
 using SignalR.Services;
 
 namespace SignalR.Controllers
@@ -33,17 +34,19 @@ namespace SignalR.Controllers
         [HttpGet("SendMessage")]
         public async Task<string> SendMessage()
         {
-            var message = new List<string>();
-            message.Add(JsonConvert.SerializeObject(new TestModel() { Id = 1, FirstName = "M", LastName = "Z" }));//when send model
-            message.Add("sample text");//when send text
+            var message = new List<string>
+            {
+                JsonConvert.SerializeObject(new TestModel() {Id = 1, FirstName = "M", LastName = "Z"}), //when send model
+                "sample text" //when send text
+            };
             await _messageHub.Clients.All.SendMessageToUser(message);
            
             return "Message is sent!";
         }
         [HttpGet("SendText")]
-        public async Task<string> SendText()
+        public async Task<string> SendText(string text)
         {
-            await _chatHub.Clients.All.SendAsync( "Zamani", "Hello");
+            await _chatHub.Clients.All.SendAsync( new MessageModel {User = "admin",Message = text,Date = DateTime.Today.ToShortDateString()});
             return "Text is sent!";
         }
         #endregion

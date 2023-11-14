@@ -1,4 +1,6 @@
-﻿namespace SignalR.Contracts
+﻿using SignalR.Models;
+
+namespace SignalR.Contracts
 {
     public interface IMessageHubClient
     {
@@ -8,7 +10,7 @@
         /// <param name="message"></param>
         /// <returns></returns>
         Task SendMessageToUser(List<string> message);
-        Task SendAsync(string user,string message);
-        Task ReceiveAsync(string user, string message);
+        Task SendAsync(MessageModel model);
+        Task ReceiveAsync(MessageModel model);
     }
 }
